@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#090d12">
+    <title>Missão Fire Watch</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="brand" aria-label="Fire Watch">
+        <span class="brand-mark">FW</span>
+        <div><strong>FIRE WATCH</strong><small>MISSÃO DE SEGURANÇA</small></div>
+      </header>
+
+      <section id="startScreen" class="screen active">
+        <p class="eyebrow">QUIZ INTERATIVO</p>
+        <h1>Entre primeiro.<br><span>Proteja quem salva.</span></h1>
+        <p class="lead">Teste o que você aprendeu sobre o drone que ajuda profissionais a observar áreas de risco antes da aproximação.</p>
+        <div class="mission-card">
+          <span>MISSÃO</span>
+          <strong>5 perguntas · acerte pelo menos 4</strong>
+          <small>Conclua para desbloquear a roleta de prêmios.</small>
+        </div>
+        <button id="startButton" class="primary">INICIAR MISSÃO <span>→</span></button>
+      </section>
+
+      <section id="quizScreen" class="screen" aria-live="polite">
+        <div class="progress-meta"><span id="progressText">QUESTÃO 1 DE 5</span><strong id="scoreText">0 ACERTOS</strong></div>
+        <div class="progress"><span id="progressBar"></span></div>
+        <p id="questionTag" class="eyebrow">OBJETIVO</p>
+        <h2 id="questionText"></h2>
+        <div id="answers" class="answers"></div>
+        <div id="feedback" class="feedback" hidden></div>
+        <button id="nextButton" class="primary" hidden>PRÓXIMA <span>→</span></button>
+      </section>
+
+      <section id="failedScreen" class="screen result-screen">
+        <div class="status-icon">↻</div>
+        <p class="eyebrow">MISSÃO INCOMPLETA</p>
+        <h2>Quase lá!</h2>
+        <p id="failedScore" class="lead"></p>
+        <p>Observe novamente como o projeto protege profissionais e tente mais uma vez.</p>
+        <button id="retryButton" class="primary">TENTAR NOVAMENTE</button>
+      </section>
+
+      <section id="wheelScreen" class="screen result-screen">
+        <p class="eyebrow">MISSÃO CONCLUÍDA</p>
+        <h2>Roleta desbloqueada!</h2>
+        <p>Gire uma vez para descobrir quantas balas você ganhou.</p>
+        <div class="wheel-wrap">
+          <div class="pointer" aria-hidden="true"></div>
+          <div id="wheel" class="wheel" aria-label="Roleta com prêmios de uma a cinco balas"></div>
+        </div>
+        <button id="spinButton" class="primary">GIRAR ROLETA</button>
+      </section>
+
+      <section id="prizeScreen" class="screen result-screen" aria-live="polite">
+        <div class="status-icon prize">✓</div>
+        <p class="eyebrow">PRÊMIO LIBERADO</p>
+        <h2 id="prizeTitle"></h2>
+        <p>Mostre esta tela no estande para retirar seu prêmio.</p>
+        <div class="claim-code"><span>CÓDIGO</span><strong id="claimCode"></strong></div>
+        <small class="saved-note">Seu resultado foi salvo neste aparelho.</small>
+      </section>
+    </main>
+
+    <footer>Projeto Fire Watch · Tecnologia a serviço de quem protege</footer>
+    <script src="quiz-core.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
