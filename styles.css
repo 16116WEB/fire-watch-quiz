@@ -424,6 +424,74 @@ h2 { margin: 0 0 23px; font-size: clamp(2.3rem, 4vw, 3.65rem); font-weight: 700;
 
 footer { display: flex; justify-content: space-between; gap: 20px; padding: 17px 3px 0; color: #58656a; font: 600 .56rem/1 "Barlow Condensed", sans-serif; letter-spacing: .13em; }
 
+.reset-access {
+  position: fixed;
+  z-index: 20;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  min-width: 52px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 13px;
+  border: 1px solid #334047;
+  background: rgba(9, 13, 15, .9);
+  color: #8d9ba1;
+  font: 700 .62rem/1 "Barlow Condensed", sans-serif;
+  letter-spacing: .13em;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.reset-access svg { width: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.reset-access:hover { border-color: var(--hi-vis); background: #12191d; color: var(--hi-vis); }
+.reset-access:focus-visible, .dialog-close:focus-visible, .secondary:focus-visible, .confirm-reset:focus-visible, .reset-dialog input:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+
+.reset-dialog {
+  width: min(calc(100% - 32px), 440px);
+  padding: 0;
+  border: 1px solid #39464c;
+  background: #0d1215;
+  color: var(--text);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, .72);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+.reset-dialog::backdrop { background: rgba(2, 4, 5, .82); backdrop-filter: blur(5px); }
+.reset-dialog form { display: grid; }
+
+.dialog-head {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--hi-vis);
+  font: 700 .64rem/1 "Barlow Condensed", sans-serif;
+  letter-spacing: .17em;
+}
+
+.dialog-close { width: 32px; height: 32px; border: 0; background: transparent; color: var(--muted); font-size: 1.5rem; cursor: pointer; }
+.dialog-body { padding: 28px 26px 22px; text-align: center; }
+.dialog-lock { display: grid; width: 50px; height: 50px; margin: 0 auto 18px; place-items: center; border: 1px solid rgba(217, 255, 102, .3); color: var(--hi-vis); font-size: 1.65rem; }
+.dialog-body h2 { margin-bottom: 12px; font-size: 2.25rem; text-transform: uppercase; }
+.dialog-body > p:not(.reset-error) { margin: 0 auto 23px; color: var(--muted); font-size: .86rem; line-height: 1.55; }
+.dialog-body label { display: block; margin-bottom: 8px; color: var(--muted); font: 700 .61rem/1 "Barlow Condensed", sans-serif; letter-spacing: .16em; text-align: left; }
+.reset-dialog input { width: 100%; height: 54px; border: 1px solid #354148; background: #090d0f; color: var(--hi-vis); font: 700 1.4rem/1 ui-monospace, monospace; letter-spacing: .34em; text-align: center; }
+.reset-dialog input[aria-invalid="true"] { border-color: var(--ember); }
+.reset-error { margin: 10px 0 0; color: #ff8b67; font-size: .78rem; text-align: left; }
+
+.dialog-actions { display: grid; grid-template-columns: .8fr 1.2fr; gap: 10px; padding: 0 26px 26px; }
+.secondary, .confirm-reset { min-height: 48px; border: 1px solid var(--line); color: white; font: 700 .68rem/1 "Barlow Condensed", sans-serif; letter-spacing: .12em; cursor: pointer; }
+.secondary { background: transparent; color: var(--muted); }
+.confirm-reset { border-color: var(--ember); background: var(--ember); }
+.secondary:hover { border-color: #56656c; color: white; }
+.confirm-reset:hover { background: #ff6b37; }
+
 @keyframes enter { from { opacity: 0; transform: translateY(13px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 5px rgba(85, 231, 160, .08), 0 0 12px rgba(85, 231, 160, .45); } 50% { box-shadow: 0 0 0 8px rgba(85, 231, 160, 0), 0 0 18px rgba(85, 231, 160, .72); } }
 @keyframes scan { from { transform: translateY(-80px); } to { transform: translateY(820px); } }
@@ -476,6 +544,10 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding: 17px
   .answer { min-height: 58px; padding: 10px 11px; font-size: .9rem; }
   .progress { margin-bottom: 36px; }
   footer { display: none; }
+  .reset-access { right: 10px; bottom: 10px; width: 42px; min-width: 42px; padding: 0; }
+  .reset-access span { display: none; }
+  .dialog-body { padding: 24px 20px 20px; }
+  .dialog-actions { padding: 0 20px 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

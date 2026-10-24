@@ -146,6 +146,36 @@
       </footer>
     </main>
 
+    <button id="resetAccessButton" class="reset-access" type="button" aria-label="Abrir controle de reinicialização" title="Resetar quiz">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 11a8 8 0 1 0-2.34 5.66M20 4v7h-7"/>
+        <rect x="9" y="10" width="7" height="6" rx="1"/>
+        <path d="M10.5 10V8.5a2 2 0 0 1 4 0V10"/>
+      </svg>
+      <span>RESET</span>
+    </button>
+
+    <dialog id="resetDialog" class="reset-dialog" aria-labelledby="resetTitle">
+      <form id="resetForm" method="dialog">
+        <div class="dialog-head">
+          <span>CONTROLE RESTRITO</span>
+          <button id="closeResetButton" class="dialog-close" type="button" aria-label="Fechar">×</button>
+        </div>
+        <div class="dialog-body">
+          <span class="dialog-lock" aria-hidden="true">⌁</span>
+          <h2 id="resetTitle">Reiniciar missão?</h2>
+          <p>Digite a senha do responsável para apagar o prêmio salvo neste aparelho e liberar uma nova tentativa.</p>
+          <label for="resetPassword">SENHA DE ACESSO</label>
+          <input id="resetPassword" name="password" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" required>
+          <p id="resetError" class="reset-error" role="alert" hidden>Senha incorreta. Tente novamente.</p>
+        </div>
+        <div class="dialog-actions">
+          <button id="cancelResetButton" class="secondary" type="button">CANCELAR</button>
+          <button class="confirm-reset" type="submit">CONFIRMAR RESET</button>
+        </div>
+      </form>
+    </dialog>
+
     <script src="quiz-core.js"></script>
     <script src="app.js"></script>
   </body>

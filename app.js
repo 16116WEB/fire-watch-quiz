@@ -1,4 +1,5 @@
 const STORAGE_KEY = "firewatch-quiz-result-v1";
+const RESET_PASSWORD = "2323";
 const screens = [...document.querySelectorAll(".screen")];
 const $ = (id) => document.getElementById(id);
 let questionIndex = 0;
@@ -124,6 +125,33 @@ function spinWheel() {
   window.setTimeout(() => showPrize(result), 4300);
 }
 
+function openResetDialog() {
+  $("resetPassword").value = "";
+  $("resetPassword").removeAttribute("aria-invalid");
+  $("resetError").hidden = true;
+  $("resetDialog").showModal();
+  $("resetPassword").focus();
+}
+
+function closeResetDialog() {
+  $("resetDialog").close();
+  $("resetAccessButton").focus();
+}
+
+function resetStoredQuiz() {
+  localStorage.removeItem(STORAGE_KEY);
+  questionIndex = 0;
+  score = 0;
+  answered = false;
+  $("spinButton").disabled = false;
+  $("wheel").style.transition = "none";
+  $("wheel").style.transform = "rotate(0deg)";
+  requestAnimationFrame(() => {
+    $("wheel").style.transition = "";
+  });
+  showScreen("startScreen");
+}
+
 $("startButton").addEventListener("click", resetQuiz);
 $("retryButton").addEventListener("click", resetQuiz);
 $("nextButton").addEventListener("click", () => {
@@ -132,6 +160,20 @@ $("nextButton").addEventListener("click", () => {
   else renderQuestion();
 });
 $("spinButton").addEventListener("click", spinWheel);
+$("resetAccessButton").addEventListener("click", openResetDialog);
+$("closeResetButton").addEventListener("click", closeResetDialog);
+$("cancelResetButton").addEventListener("click", closeResetDialog);
+$("resetForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  if ($("resetPassword").value !== RESET_PASSWORD) {
+    $("resetPassword").setAttribute("aria-invalid", "true");
+    $("resetError").hidden = false;
+    $("resetPassword").select();
+    return;
+  }
+  $("resetDialog").close();
+  resetStoredQuiz();
+});
 
 renderWheel();
 try {
