@@ -36,4 +36,9 @@ Publique esta pasta como um site estatico. Quando tiver a URL final, gere o QR C
 - A roleta pode entregar 1, 2, 3 ou 5 balas, com media de 1,8 bala por classificado.
 - Depois do giro, o premio e o codigo ficam salvos no navegador e nao ha novo giro no mesmo perfil.
 
+## Recursos visuais
+
+- Fotografia de operacao com drone: USDA Forest Service / Region 5 Photography, em dominio publico, via Wikimedia Commons.
+- Tipografia Barlow Condensed: Google Fonts, licenciada pela SIL Open Font License 1.1 (licenca incluida em `assets/`).
+
 <!-- shortcut: o bloqueio usa localStorage e pode ser contornado com outro navegador ou modo anonimo; adote um backend apenas se o premio deixar de ser simbolico. -->

@@ -7,6 +7,15 @@ let answered = false;
 
 function showScreen(id) {
   screens.forEach((screen) => screen.classList.toggle("active", screen.id === id));
+  $("appShell").dataset.screen = id;
+  const phases = {
+    startScreen: "BRIEFING",
+    quizScreen: "AVALIAÇÃO EM CURSO",
+    failedScreen: "REVISÃO NECESSÁRIA",
+    wheelScreen: "RECOMPENSA AUTORIZADA",
+    prizeScreen: "MISSÃO FINALIZADA",
+  };
+  $("missionPhase").textContent = phases[id] || "BRIEFING";
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -23,7 +32,16 @@ function renderQuestion() {
   $("answers").replaceChildren(...question.answers.map((answer, index) => {
     const button = document.createElement("button");
     button.className = "answer";
-    button.textContent = answer;
+    const marker = document.createElement("span");
+    marker.className = "answer-index";
+    marker.textContent = String.fromCharCode(65 + index);
+    const label = document.createElement("span");
+    label.textContent = answer;
+    const arrow = document.createElement("span");
+    arrow.className = "answer-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "↗";
+    button.append(marker, label, arrow);
     button.addEventListener("click", () => answerQuestion(index));
     return button;
   }));

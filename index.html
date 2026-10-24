@@ -3,70 +3,149 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#090d12">
+    <meta name="theme-color" content="#080b0d">
+    <meta name="description" content="Quiz interativo do projeto Fire Watch: tecnologia aérea para reduzir a exposição de profissionais ao risco.">
     <title>Missão Fire Watch</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="assets/drone-firefighting.jpg" as="image">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <main class="shell">
-      <header class="brand" aria-label="Fire Watch">
-        <span class="brand-mark">FW</span>
-        <div><strong>FIRE WATCH</strong><small>MISSÃO DE SEGURANÇA</small></div>
+    <div class="page-grid" aria-hidden="true"></div>
+
+    <main id="appShell" class="shell" data-screen="startScreen">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Fire Watch — início">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" role="img">
+              <path d="M15 14h18M24 14v20M15 34h18M10 10l9 9M38 10l-9 9M10 38l9-9M38 38l-9-9"/>
+              <circle cx="9" cy="9" r="5"/><circle cx="39" cy="9" r="5"/>
+              <circle cx="9" cy="39" r="5"/><circle cx="39" cy="39" r="5"/>
+              <rect x="19" y="18" width="10" height="12" rx="2"/>
+            </svg>
+          </span>
+          <span class="brand-copy">
+            <strong>FIRE WATCH</strong>
+            <small>SISTEMA DE RECONHECIMENTO AÉREO</small>
+          </span>
+        </a>
+
+        <div class="system-status" aria-label="Sistema operacional">
+          <span class="status-dot"></span>
+          <span>OPERAÇÃO ATIVA</span>
+        </div>
       </header>
 
-      <section id="startScreen" class="screen active">
-        <p class="eyebrow">QUIZ INTERATIVO</p>
-        <h1>Entre primeiro.<br><span>Proteja quem salva.</span></h1>
-        <p class="lead">Teste o que você aprendeu sobre o drone que ajuda profissionais a observar áreas de risco antes da aproximação.</p>
-        <div class="mission-card">
-          <span>MISSÃO</span>
-          <strong>5 perguntas · acerte pelo menos 4</strong>
-          <small>Conclua para desbloquear a roleta de prêmios.</small>
-        </div>
-        <button id="startButton" class="primary">INICIAR MISSÃO <span>→</span></button>
-      </section>
+      <div class="experience">
+        <aside class="mission-visual" aria-label="Drone utilizado em operação de apoio a bombeiros">
+          <img src="assets/drone-firefighting.jpg" alt="Equipe do Serviço Florestal dos Estados Unidos preparando um drone para uma operação de combate a incêndio">
+          <div class="visual-shade"></div>
+          <div class="scan-line" aria-hidden="true"></div>
+          <div class="target-reticle" aria-hidden="true"><span></span></div>
 
-      <section id="quizScreen" class="screen" aria-live="polite">
-        <div class="progress-meta"><span id="progressText">QUESTÃO 1 DE 5</span><strong id="scoreText">0 ACERTOS</strong></div>
-        <div class="progress"><span id="progressBar"></span></div>
-        <p id="questionTag" class="eyebrow">OBJETIVO</p>
-        <h2 id="questionText"></h2>
-        <div id="answers" class="answers"></div>
-        <div id="feedback" class="feedback" hidden></div>
-        <button id="nextButton" class="primary" hidden>PRÓXIMA <span>→</span></button>
-      </section>
+          <div class="visual-topline">
+            <span>FW // UNIDADE 01</span>
+            <span>REC</span>
+          </div>
 
-      <section id="failedScreen" class="screen result-screen">
-        <div class="status-icon">↻</div>
-        <p class="eyebrow">MISSÃO INCOMPLETA</p>
-        <h2>Quase lá!</h2>
-        <p id="failedScore" class="lead"></p>
-        <p>Observe novamente como o projeto protege profissionais e tente mais uma vez.</p>
-        <button id="retryButton" class="primary">TENTAR NOVAMENTE</button>
-      </section>
+          <div class="visual-caption">
+            <span class="coordinates">40°47' N · 123°42' W</span>
+            <h2>Olhar primeiro.<br>Agir com segurança.</h2>
+            <p>Informação aérea antes da exposição humana.</p>
+          </div>
 
-      <section id="wheelScreen" class="screen result-screen">
-        <p class="eyebrow">MISSÃO CONCLUÍDA</p>
-        <h2>Roleta desbloqueada!</h2>
-        <p>Gire uma vez para descobrir quantas balas você ganhou.</p>
-        <div class="wheel-wrap">
-          <div class="pointer" aria-hidden="true"></div>
-          <div id="wheel" class="wheel" aria-label="Roleta com prêmios de uma a cinco balas"></div>
-        </div>
-        <button id="spinButton" class="primary">GIRAR ROLETA</button>
-      </section>
+          <dl class="telemetry" aria-label="Indicadores da missão">
+            <div><dt>LINK</dt><dd>ESTÁVEL</dd></div>
+            <div><dt>VISÃO</dt><dd>AÉREA</dd></div>
+            <div><dt>RISCO</dt><dd>MONITORADO</dd></div>
+          </dl>
 
-      <section id="prizeScreen" class="screen result-screen" aria-live="polite">
-        <div class="status-icon prize">✓</div>
-        <p class="eyebrow">PRÊMIO LIBERADO</p>
-        <h2 id="prizeTitle"></h2>
-        <p>Mostre esta tela no estande para retirar seu prêmio.</p>
-        <div class="claim-code"><span>CÓDIGO</span><strong id="claimCode"></strong></div>
-        <small class="saved-note">Seu resultado foi salvo neste aparelho.</small>
-      </section>
+          <a class="photo-credit" href="https://commons.wikimedia.org/wiki/File:DroneUASFirefighting-SixRivers-AA-05_(52358583294).jpg" target="_blank" rel="noreferrer">Imagem: USDA Forest Service · domínio público</a>
+        </aside>
+
+        <section class="console" aria-label="Quiz Fire Watch">
+          <div class="console-head">
+            <div>
+              <span class="console-label">PROTOCOLO DE TREINAMENTO</span>
+              <strong id="missionPhase">BRIEFING</strong>
+            </div>
+            <span class="console-id">FW-QUIZ / 01</span>
+          </div>
+
+          <div class="screen-wrap">
+            <section id="startScreen" class="screen active">
+              <p class="eyebrow"><span>01</span> QUIZ INTERATIVO</p>
+              <h1>Você está pronto para a <em>missão?</em></h1>
+              <p class="lead">Teste o que aprendeu sobre o drone que ajuda profissionais a observar áreas de risco antes da aproximação.</p>
+
+              <div class="mission-brief">
+                <div class="brief-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32"><path d="M16 3 28 9v7c0 7-5 11-12 13C9 27 4 23 4 16V9l12-6Z"/><path d="m10 16 4 4 8-9"/></svg>
+                </div>
+                <div>
+                  <span>CRITÉRIO DE APROVAÇÃO</span>
+                  <strong>4 acertos em 5 perguntas</strong>
+                  <small>Conclua o protocolo para desbloquear a roleta.</small>
+                </div>
+              </div>
+
+              <button id="startButton" class="primary">
+                <span>INICIAR MISSÃO</span><span aria-hidden="true">→</span>
+              </button>
+              <p class="microcopy">Duração estimada: 2 minutos</p>
+            </section>
+
+            <section id="quizScreen" class="screen" aria-live="polite">
+              <div class="progress-meta">
+                <span id="progressText">QUESTÃO 1 DE 5</span>
+                <strong id="scoreText">0 ACERTOS</strong>
+              </div>
+              <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+              <p id="questionTag" class="eyebrow"><span>ALVO</span> OBJETIVO</p>
+              <h2 id="questionText"></h2>
+              <div id="answers" class="answers"></div>
+              <div id="feedback" class="feedback" hidden></div>
+              <button id="nextButton" class="primary" hidden>PRÓXIMA <span>→</span></button>
+            </section>
+
+            <section id="failedScreen" class="screen result-screen">
+              <div class="status-icon retry" aria-hidden="true">↻</div>
+              <p class="eyebrow"><span>!</span> MISSÃO INCOMPLETA</p>
+              <h2>Quase lá.</h2>
+              <p id="failedScore" class="lead"></p>
+              <p>Observe novamente como o projeto protege profissionais e tente mais uma vez.</p>
+              <button id="retryButton" class="primary">REINICIAR PROTOCOLO <span>↻</span></button>
+            </section>
+
+            <section id="wheelScreen" class="screen result-screen">
+              <p class="eyebrow"><span>✓</span> MISSÃO CONCLUÍDA</p>
+              <h2>Roleta desbloqueada.</h2>
+              <p>Gire uma vez para descobrir quantas balas você ganhou.</p>
+              <div class="wheel-wrap">
+                <div class="pointer" aria-hidden="true"></div>
+                <div id="wheel" class="wheel" aria-label="Roleta com prêmios de uma a cinco balas"></div>
+              </div>
+              <button id="spinButton" class="primary">GIRAR ROLETA <span>↻</span></button>
+            </section>
+
+            <section id="prizeScreen" class="screen result-screen" aria-live="polite">
+              <div class="status-icon prize" aria-hidden="true">✓</div>
+              <p class="eyebrow"><span>OK</span> PRÊMIO LIBERADO</p>
+              <h2 id="prizeTitle"></h2>
+              <p>Mostre esta tela no estande para retirar seu prêmio.</p>
+              <div class="claim-code"><span>CÓDIGO DE VALIDAÇÃO</span><strong id="claimCode"></strong></div>
+              <small class="saved-note">Resultado registrado neste aparelho.</small>
+            </section>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <span>FIRE WATCH · PROJETO EDUCACIONAL</span>
+        <span>TECNOLOGIA A SERVIÇO DE QUEM PROTEGE</span>
+      </footer>
     </main>
 
-    <footer>Projeto Fire Watch · Tecnologia a serviço de quem protege</footer>
     <script src="quiz-core.js"></script>
     <script src="app.js"></script>
   </body>
